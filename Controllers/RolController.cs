@@ -12,27 +12,27 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class RolController : ControllerBase
     {
         private SitioDB db;
-        public UsuarioController(SitioDB sitioDB)
+        public RolController(SitioDB sitioDB)
         {
             db = sitioDB;
         }
         [HttpPost]
         [Route("Create")]
-        public Respuesta Crear(UsuarioDB usuario)
+        public Respuesta Crear(RolDB rol)
         {
             Respuesta respuesta = new Respuesta();
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Usuarios.Add(usuario);
+                    db.Rol.Add(rol);
                     db.SaveChanges();
                     respuesta.codigo = 200;
-                    respuesta.mensaje = "Usuario ingresado exitosamente";
-                    respuesta.item = usuario.id_usuario;
+                    respuesta.mensaje = "Rol ingresado exitosamente";
+                    respuesta.item = rol.id_rol;
                     respuesta.status = true;
                 }
                 else
@@ -52,23 +52,23 @@ namespace API.Controllers
         }
         [HttpGet]
         [Route("Get")]
-        public async Task<Respuesta> Get(int id_usuario)
+        public async Task<Respuesta> Get(int id_Rol)
         {
             Respuesta respuesta = new Respuesta();
-            UsuarioDB? usuario = await db.Usuarios.FindAsync(id_usuario);
-            if (usuario == null)
+            RolDB? rol = await db.Rol.FindAsync(id_Rol);
+            if (rol == null)
             {
-                usuario = new UsuarioDB();
+                rol = new RolDB();
                 respuesta.codigo = 200;
-                respuesta.mensaje = "Usuario no encontrado";
-                respuesta.item = usuario;
+                respuesta.mensaje = "Rol no encontrado";
+                respuesta.item = rol;
                 respuesta.status = true;
             }
             else
             {
                 respuesta.codigo = 200;
-                respuesta.mensaje = "Usuario encontrado exitosamente";
-                respuesta.item = usuario;
+                respuesta.mensaje = "Rol encontrado exitosamente";
+                respuesta.item = rol;
                 respuesta.status = true;
             }
             return respuesta;
@@ -79,7 +79,7 @@ namespace API.Controllers
         public Respuesta Listar() // Solo 3 niveles de profundidad
         {
             Respuesta respuesta = new Respuesta();
-            List<UsuarioDB> list = db.Usuarios.ToList();
+            List<RolDB> list = db.Rol.ToList();
             respuesta.status = true;
             respuesta.item = list;
             respuesta.mensaje = "Lista obtenida con éxito";
@@ -88,36 +88,33 @@ namespace API.Controllers
         }
         [HttpPut]
         [Route("Edit")]
-        public async Task<Respuesta> Editar(UsuarioDB usuario)
+        public async Task<Respuesta> Editar(RolDB rol)
         {
             Respuesta respuesta = new Respuesta();
             try
             {
-                UsuarioDB? Original = db.Usuarios.Find(usuario.id_usuario);
+                RolDB? Original = db.Rol.Find(rol.id_rol);
                 if (Original == null)
                 {
                     respuesta.codigo = 200;
-                    respuesta.mensaje = "Usuario no encontrado";
+                    respuesta.mensaje = "Rol no encontrado";
                     respuesta.status = false;
                     return respuesta;
                 }
                 else
                 {
-                    Original.nombre = usuario.nombre;
-                    Original.correo = usuario.correo;
-                    Original.password = usuario.password;
-
+                    Original.nombre = rol.nombre;
                     if (await TryUpdateModelAsync(Original))
                     {
                         db.SaveChanges();
                         respuesta.codigo = 200;
-                        respuesta.mensaje = "Usuario editado exitosamente";
+                        respuesta.mensaje = "Rol editado exitosamente";
                         respuesta.status = true;
                     }
                     else
                     {
                         respuesta.codigo = 200;
-                        respuesta.mensaje = "Error al editar el usuario";
+                        respuesta.mensaje = "Error al editar el producto";
                         respuesta.status = false;
                         return respuesta;
                     }
@@ -141,11 +138,11 @@ namespace API.Controllers
             Respuesta respuesta = new Respuesta();
             try
             {
-                UsuarioDB? Eliminado = db.Usuarios.Find(id_Rol);
+                RolDB? Eliminado = db.Rol.Find(id_Rol);
                 if (Eliminado == null)
                 {
                     respuesta.codigo = 200;
-                    respuesta.mensaje = "Usuario no encontrado";
+                    respuesta.mensaje = "Rol no encontrado";
                     respuesta.status = true;
                 }
                 else
@@ -153,7 +150,7 @@ namespace API.Controllers
                     db.Remove(Eliminado);
                     db.SaveChanges();
                     respuesta.codigo = 200;
-                    respuesta.mensaje = "Usuario eliminado exitosamente";
+                    respuesta.mensaje = "Rol eliminado exitosamente";
                     respuesta.status = false;
                 }
             }

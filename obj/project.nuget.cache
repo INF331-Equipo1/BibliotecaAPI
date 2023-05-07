@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Fs6t5DusvPANxbbljywTE+p1IZrfEYgEUN4Zu+OWd8Wq00P0ei8MP9uD0hcpym8FegaIQaYKXw4W1MaMoEIp6g==",
+  "dgSpecHash": "/f5kWPNObUkznijz5sj83ehxfi7RBa9ZQ3e06/NHwAsdu/+pboKYfaMW+xQdFgHqSNsU7gmuDM3PKzP5fhcK3A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\SaaSan\\Desktop\\Universidad\\Pruebas de Software\\Repositorio\\BibliotecaAPI\\BibliotecaAPI.csproj",
+  "projectFilePath": "C:\\Users\\SaaSan\\Desktop\\Universidad\\Pruebas de Software\\Repositorio\\Organizacion\\BibliotecaAPI\\BibliotecaAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SaaSan\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\SaaSan\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
